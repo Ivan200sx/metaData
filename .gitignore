@@ -25,3 +25,8 @@ hs_err_pid*
 /build/
 /node/
 /node_modules/
+target/
+build/
+node/
+node_modules/
+/package.json
