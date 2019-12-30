@@ -31,4 +31,12 @@ public class WebWetherSgd extends WebParser {
   protected void noInfo() {
     System.out.println("no currency");
   }
+
+  public String getSgdToWeb() {
+    String sgdToWeb;
+
+    sgdToWeb = String.valueOf(tempSgd);
+
+    return sgdToWeb;
+  }
 }

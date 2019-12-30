@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 
-abstract class WebParser {
+public abstract class WebParser {
   protected String url;
   protected String html;
 

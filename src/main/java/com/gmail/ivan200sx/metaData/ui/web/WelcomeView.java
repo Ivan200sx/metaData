@@ -1,8 +1,12 @@
 package com.gmail.ivan200sx.metaData.ui.web;
 
+import com.gmail.ivan200sx.metaData.WebParser;
+import com.gmail.ivan200sx.metaData.WebWetherSgd;
+import com.gmail.ivan200sx.metaData.WebWetherTts;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.checkbox.Checkbox;
+import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -31,14 +35,34 @@ public class WelcomeView extends VerticalLayout {
       Checkbox checkbox = new Checkbox(taskField.getValue());
       todosList.add(checkbox);
     });
-    add( // (5)
-      new H1("Vaadin Todo"),
-      todosList,
-      new HorizontalLayout(
-        taskField,
-        addButton
-      )
+
+    Button tempButton = new Button("Add row"); // (3)
+    tempButton.addClickShortcut(Key.ENTER);
+    tempButton.addClickListener(click -> {
+
+      WebWetherTts webWetTts = new WebWetherTts();
+      webWetTts.parse();
+      add(new Label(webWetTts.getTtsToWeb() + "-tts"));
+
+      WebWetherSgd webWetSgd = new WebWetherSgd();
+      webWetSgd.parse();
+      add(new Label(webWetTts.getTtsToWeb() + "-sugardas"));
+
+    });
+
+    add(
+            new H1("Vaadin Todo and Weather"),
+            todosList,
+            new HorizontalLayout(
+                    taskField,
+                    addButton,
+                    tempButton
+            )
     );
-    add(new Label("OK"));
+
+
+
+
+
   }
 }

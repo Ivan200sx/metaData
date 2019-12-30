@@ -31,4 +31,12 @@ public class WebWetherTts extends WebParser {
   protected void noInfo() {
     System.out.println("no currency");
   }
-}
+
+  public String getTtsToWeb() {
+    String ttsToWeb;
+
+    ttsToWeb = String.valueOf(tepmTts);
+
+    return ttsToWeb;
+  }
+ }
