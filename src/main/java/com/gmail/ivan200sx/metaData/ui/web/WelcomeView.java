@@ -46,7 +46,7 @@ public class WelcomeView extends VerticalLayout {
 
       WebWetherSgd webWetSgd = new WebWetherSgd();
       webWetSgd.parse();
-      add(new Label(webWetTts.getTtsToWeb() + "-sugardas"));
+      add(new Label(webWetSgd.getSgdToWeb() + "-sugardas"));
 
     });
 
