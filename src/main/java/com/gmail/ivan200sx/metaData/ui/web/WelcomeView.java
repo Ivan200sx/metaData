@@ -57,10 +57,17 @@ public class WelcomeView extends VerticalLayout {
                     taskField,
                     addButton,
                     tempButton
-            )
+            ),
+            todosList,
+            new H1("Vaadin222 Todo and Weather")
     );
 
-
+    add(
+            new H1("Vaadin333 Todo and Weather")
+    );
+    add(
+            new H1("555 Todo and Weather")
+    );
 
 
 
