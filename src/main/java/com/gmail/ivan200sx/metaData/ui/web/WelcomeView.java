@@ -31,10 +31,11 @@ public class WelcomeView extends VerticalLayout {
     addButton.addClickShortcut(Key.ENTER);
     addButton.addClickListener(click -> {
       // (4)
-      Checkbox checkbox = new Checkbox(taskField.getValue());
-      if (checkbox) {
+      if (!taskField.isEmpty()) {
+        Checkbox checkbox = new Checkbox(taskField.getValue());
         todosList.add(checkbox);
       }
+      //todosList.add(checkbox);
     });
 
     Button tempButton = new Button("Add row"); // (3)
