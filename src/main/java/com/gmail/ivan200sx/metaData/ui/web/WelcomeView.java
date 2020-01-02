@@ -1,6 +1,5 @@
 package com.gmail.ivan200sx.metaData.ui.web;
 
-import com.gmail.ivan200sx.metaData.WebParser;
 import com.gmail.ivan200sx.metaData.WebWetherSgd;
 import com.gmail.ivan200sx.metaData.WebWetherTts;
 import com.vaadin.flow.component.Key;
@@ -35,20 +34,29 @@ public class WelcomeView extends VerticalLayout {
         Checkbox checkbox = new Checkbox(taskField.getValue());
         todosList.add(checkbox);
       }
-      //todosList.add(checkbox);
     });
 
-    Button tempButton = new Button("Add row"); // (3)
+    Button tempButton = new Button("Check weather"); // (3)
     tempButton.addClickShortcut(Key.ENTER);
     tempButton.addClickListener(click -> {
 
       WebWetherTts webWetTts = new WebWetherTts();
       webWetTts.parse();
-      add(new Label("TTS (" + webWetTts.getTtsToWeb() + ")"));
+      add(new Checkbox("TTS (" + webWetTts.getTtsToWeb() + ")"));
 
       WebWetherSgd webWetSgd = new WebWetherSgd();
       webWetSgd.parse();
-      add(new Label("SUGARDAS (" + webWetSgd.getSgdToWeb() + ")"));
+      add(new Checkbox("SUGARDAS (" + webWetSgd.getSgdToWeb() + ")"));
+
+    });
+
+
+    Button deleteTempButton = new Button("Delete weather row"); // (3)
+    deleteTempButton.addClickShortcut(Key.ENTER);
+    deleteTempButton.addClickListener(click -> {
+      add(new Label("CLICK PERFORMS"));
+      addButton.setText("Fired");
+      remove(addButton);
 
     });
 
@@ -57,7 +65,8 @@ public class WelcomeView extends VerticalLayout {
             new HorizontalLayout(
                     taskField,
                     addButton,
-                    tempButton
+                    tempButton,
+                    deleteTempButton
             ),
             todosList,
             new H1("Vaadin222 Todo and Weather")
