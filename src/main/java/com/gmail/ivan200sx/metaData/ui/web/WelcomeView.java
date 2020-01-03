@@ -25,17 +25,15 @@ import com.vaadin.flow.router.Route;
 @Route(value = "", layout = MainLayout.class)
 public class WelcomeView extends VerticalLayout {
 
-  int idCounter;
-
   private static final long serialVersionUID = 1L;
   public static final String VIEW_NAME = "record";
   private List<Checkbox> checkBoxes = new ArrayList<>();
+  private List<Checkbox> weatherCheckBoxes = new ArrayList<>();
 
   public WelcomeView() {
     VerticalLayout todosList = new VerticalLayout();
 
     TextField taskField = new TextField();
-
 
     Button addButton = new Button("Add");
     addButton.addClickShortcut(Key.ENTER);
@@ -43,8 +41,6 @@ public class WelcomeView extends VerticalLayout {
       if (!taskField.isEmpty()) {
         Checkbox checkbox = new Checkbox(taskField.getValue());
         checkBoxes.add(checkbox);
-        idCounter++;
-        checkbox.setId("checkbox-" + idCounter);
         todosList.add(checkbox);
       }
     });
@@ -55,30 +51,41 @@ public class WelcomeView extends VerticalLayout {
 
       WebWetherTts webWetTts = new WebWetherTts();
       webWetTts.parse();
-      add(new Checkbox("TTS (" + webWetTts.getTtsToWeb() + ")"));
+      Checkbox weatherCheckboxTts = new Checkbox("TTS (" + webWetTts.getTtsToWeb() + ")");
+      todosList.add(weatherCheckboxTts);
+      weatherCheckBoxes.add(weatherCheckboxTts);
 
       WebWetherSgd webWetSgd = new WebWetherSgd();
       webWetSgd.parse();
-      add(new Checkbox("SUGARDAS (" + webWetSgd.getSgdToWeb() + ")"));
+      Checkbox weatherCheckboxSgd = new Checkbox("SUGARDAS (" + webWetSgd.getSgdToWeb() + ")");
+      todosList.add(weatherCheckboxSgd);
+      weatherCheckBoxes.add(weatherCheckboxSgd);
 
     });
 
 
-    Button deleteTempButton = new Button("Delete weather row"); // (3)
+    Button deleteTempButton = new Button("Delete checked weather row");
     deleteTempButton.addClickShortcut(Key.ENTER);
     deleteTempButton.addClickListener(click -> {
 
-      //addButton.setText("Fired");
-      todosList.remove(addButton);
+
+      //todosList.remove(addButton);
       
       checkBoxes.forEach(checkbox -> {
-        if(!checkbox.getValue()) {
-          
+        if(checkbox.getValue()) {
+
+          todosList.remove(checkbox);
+        }
+      });
+      weatherCheckBoxes.forEach(checkbox -> {
+        if(checkbox.getValue()) {
+
+          todosList.remove(checkbox);
         }
       });
       
       // Not recommended
-      for(int i=0; i<checkBoxes.size(); i++) {
+      /*for(int i=0; i<checkBoxes.size(); i++) {
         if(!checkBoxes.get(i).getValue()) {
           
         }
@@ -91,25 +98,20 @@ public class WelcomeView extends VerticalLayout {
           
         }
       }
-      
-      for (int i = 0; i < idCounter; i++) {
-        add(new Label("CLICK PERFORMS"));
-
-      }
 
       for(Checkbox ch: checkBoxes) {
         if(!ch.getValue()) {
 
         }
-      }
-      
+
       Stream<Component> com = getChildren();
       
       com.forEach(c -> {
         if( c.getClass().equals(Checkbox.class)) {
           
         }
-      });
+      });*/
+
 
     });
 
