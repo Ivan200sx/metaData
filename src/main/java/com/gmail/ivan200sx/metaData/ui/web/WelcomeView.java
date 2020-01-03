@@ -30,6 +30,9 @@ public class WelcomeView extends VerticalLayout {
 
     TextField taskField = new TextField();
 
+
+
+
     Button addButton = new Button("Add");
     addButton.addClickShortcut(Key.ENTER);
     addButton.addClickListener(click -> {
@@ -65,6 +68,7 @@ public class WelcomeView extends VerticalLayout {
 
       for (int i = 0; i < idCounter; i++) {
         add(new Label("CLICK PERFORMS"));
+
       }
 
     });
