@@ -1,25 +1,21 @@
 package com.gmail.ivan200sx.metaData.ui.web;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Stream;
 import com.gmail.ivan200sx.metaData.WebWetherSgd;
 import com.gmail.ivan200sx.metaData.WebWetherTts;
-import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 
 /**
- * @author Maksim Paz
- * Created: 2019-12-23
+ * @author Jevgenij Mechtijev
+ * Created: 2020-01-01
  *
  */
 @Route(value = "", layout = MainLayout.class)
@@ -67,9 +63,6 @@ public class WelcomeView extends VerticalLayout {
     Button deleteTempButton = new Button("Delete checked weather row");
     deleteTempButton.addClickShortcut(Key.ENTER);
     deleteTempButton.addClickListener(click -> {
-
-
-      //todosList.remove(addButton);
       
       checkBoxes.forEach(checkbox -> {
         if(checkbox.getValue()) {
@@ -124,16 +117,5 @@ public class WelcomeView extends VerticalLayout {
 
     add(new H1("Vaadin Todo and Weatherb END"));
 
-    /*add(
-            new H1("Vaadin Todo and Weatherb START"),
-            new HorizontalLayout(
-                    taskField,
-                    addButton,
-                    tempButton
-            ),
-            todosList,
-            deleteTempButton,
-            new H1("Vaadin Todo and Weather END")
-    );*/
   }
 }
