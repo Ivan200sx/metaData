@@ -59,9 +59,13 @@ public class WelcomeView extends VerticalLayout {
     Button deleteTempButton = new Button("Delete weather row"); // (3)
     deleteTempButton.addClickShortcut(Key.ENTER);
     deleteTempButton.addClickListener(click -> {
-      add(new Label("CLICK PERFORMS"));
-      addButton.setText("Fired");
+
+      //addButton.setText("Fired");
       todosList.remove(addButton);
+
+      for (int i = 0; i < idCounter; i++) {
+        add(new Label("CLICK PERFORMS"));
+      }
 
     });
 
