@@ -20,18 +20,23 @@ import com.vaadin.flow.router.Route;
 @Route(value = "", layout = MainLayout.class)
 public class WelcomeView extends VerticalLayout {
 
+  int idCounter;
+
   private static final long serialVersionUID = 1L;
   public static final String VIEW_NAME = "record";
 
   public WelcomeView() {
-    VerticalLayout todosList = new VerticalLayout(); // (1)
-    TextField taskField = new TextField(); // (2)
-    Button addButton = new Button("Add"); // (3)
+    VerticalLayout todosList = new VerticalLayout();
+
+    TextField taskField = new TextField();
+
+    Button addButton = new Button("Add");
     addButton.addClickShortcut(Key.ENTER);
     addButton.addClickListener(click -> {
-      // (4)
       if (!taskField.isEmpty()) {
         Checkbox checkbox = new Checkbox(taskField.getValue());
+        idCounter++;
+        checkbox.setId("checkbox-" + idCounter);
         todosList.add(checkbox);
       }
     });
@@ -56,21 +61,29 @@ public class WelcomeView extends VerticalLayout {
     deleteTempButton.addClickListener(click -> {
       add(new Label("CLICK PERFORMS"));
       addButton.setText("Fired");
-      remove(addButton);
+      todosList.remove(addButton);
 
     });
 
-    add(
-            new H1("Vaadin Todo and Weather"),
+    add(new H1("Vaadin Todo and Weatherb START"));
+    add(new HorizontalLayout(taskField, addButton, tempButton));
+
+    add(todosList);
+    todosList.add(addButton);
+    todosList.add(deleteTempButton);
+
+    add(new H1("Vaadin Todo and Weatherb END"));
+
+    /*add(
+            new H1("Vaadin Todo and Weatherb START"),
             new HorizontalLayout(
                     taskField,
                     addButton,
-                    tempButton,
-                    deleteTempButton
+                    tempButton
             ),
             todosList,
-            new H1("Vaadin222 Todo and Weather")
-    );
-
+            deleteTempButton,
+            new H1("Vaadin Todo and Weather END")
+    );*/
   }
 }
