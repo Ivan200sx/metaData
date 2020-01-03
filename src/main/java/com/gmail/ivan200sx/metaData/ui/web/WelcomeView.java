@@ -38,6 +38,7 @@ public class WelcomeView extends VerticalLayout {
         Checkbox checkbox = new Checkbox(taskField.getValue());
         checkBoxes.add(checkbox);
         todosList.add(checkbox);
+        taskField.clear();
       }
     });
 
@@ -114,8 +115,6 @@ public class WelcomeView extends VerticalLayout {
     add(todosList);
     todosList.add(addButton);
     todosList.add(deleteTempButton);
-
-    add(new H1("Vaadin Todo and Weatherb END"));
 
   }
 }
