@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.gmail.ivan200sx.metaData.ui.web"})
+@ComponentScan(basePackages = {"com.gmail.ivan200sx.metaData.ui.web", "com.gmail.ivan200sx.metaData"})
 public class MetaDataApplication {
 
   public static void main(String[] args) {

@@ -2,6 +2,7 @@ package com.gmail.ivan200sx.metaData.ui.web;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import com.gmail.ivan200sx.metaData.WebWetherSgd;
 import com.gmail.ivan200sx.metaData.WebWetherTts;
 import com.vaadin.flow.component.Key;
@@ -27,7 +28,8 @@ public class WelcomeView extends VerticalLayout {
   private List<Checkbox> checkBoxes = new ArrayList<>();
   private List<Checkbox> weatherCheckBoxes = new ArrayList<>();
 
-  public WelcomeView() {
+  @Autowired
+  public WelcomeView(WebWetherTts webWetTts) {
     VerticalLayout todosList = new VerticalLayout();
 
     TextField taskField = new TextField();
@@ -48,7 +50,7 @@ public class WelcomeView extends VerticalLayout {
     tempButton.addClickShortcut(Key.ENTER);
     tempButton.addClickListener(click -> {
 
-      WebWetherTts webWetTts = new WebWetherTts();
+      //WebWetherTts webWetTts = new WebWetherTts();
       webWetTts.parse();
       Checkbox weatherCheckboxTts = new Checkbox("TTS (" + webWetTts.getTtsToWeb() + ")");
       todosList.add(weatherCheckboxTts);
