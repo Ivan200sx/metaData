@@ -56,7 +56,7 @@ public class Menu  extends FlexLayout implements BeforeEnterHandler {
 
     // Note! Image resource url is resolved here as it is dependent on the
     // execution mode (development or production) and browser ES level support
-    /*
+
     String resolvedImage = VaadinServletService.getCurrent()
             .resolveResource("img/logo.png",
                     VaadinSession.getCurrent().getBrowser());
@@ -64,7 +64,6 @@ public class Menu  extends FlexLayout implements BeforeEnterHandler {
     Image image = new Image(resolvedImage, "");
     image.getStyle().set("width", "40px");
     top.add(image);
-    */
     top.add(title);
     add(top);
 

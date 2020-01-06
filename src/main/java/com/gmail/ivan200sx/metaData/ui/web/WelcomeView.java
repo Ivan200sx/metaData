@@ -8,6 +8,7 @@ import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
@@ -30,13 +31,14 @@ public class WelcomeView extends VerticalLayout {
     VerticalLayout todosList = new VerticalLayout();
 
     TextField taskField = new TextField();
+    taskField.setPlaceholder("Enter something to do...");
 
     Button addButton = new Button("Add");
     addButton.addClickShortcut(Key.ENTER);
     addButton.addClickListener(click -> {
       if (!taskField.isEmpty()) {
         Checkbox checkbox = new Checkbox(taskField.getValue());
-        checkBoxes.add(checkbox);
+        //checkBoxes.add(checkbox);
         todosList.add(checkbox);
         taskField.clear();
       }
@@ -60,20 +62,17 @@ public class WelcomeView extends VerticalLayout {
 
     });
 
-
-    Button deleteTempButton = new Button("Delete checked weather row");
+    Button deleteTempButton = new Button("Delete checked weather");
     deleteTempButton.addClickShortcut(Key.ENTER);
     deleteTempButton.addClickListener(click -> {
       
       checkBoxes.forEach(checkbox -> {
         if(checkbox.getValue()) {
-
           todosList.remove(checkbox);
         }
       });
       weatherCheckBoxes.forEach(checkbox -> {
         if(checkbox.getValue()) {
-
           todosList.remove(checkbox);
         }
       });
@@ -109,12 +108,15 @@ public class WelcomeView extends VerticalLayout {
 
     });
 
-    add(new H1("Vaadin Todo and Weatherb START"));
-    add(new HorizontalLayout(taskField, addButton, tempButton));
+    add(new H1("Vaadin Checkbox Interface"));
+    todosList.add(new HorizontalLayout(taskField, addButton, tempButton, deleteTempButton));
+    todosList.setWidth("100%");
+
+    todosList.setAlignItems(Alignment.CENTER);
+    /*Label labelTitulo = new Label("Teste");
+    todosList.add(labelTitulo);*/
 
     add(todosList);
-    todosList.add(addButton);
-    todosList.add(deleteTempButton);
 
   }
 }
