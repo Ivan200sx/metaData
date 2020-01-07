@@ -29,7 +29,7 @@ public class WelcomeView extends VerticalLayout {
   private List<Checkbox> weatherCheckBoxes = new ArrayList<>();
 
   @Autowired
-  public WelcomeView(WebWetherTts webWetTts) {
+  public WelcomeView(WebWetherTts webWetTts, WebWetherSgd webWetSgd) {
     VerticalLayout todosList = new VerticalLayout();
 
     TextField taskField = new TextField();
@@ -56,7 +56,7 @@ public class WelcomeView extends VerticalLayout {
       todosList.add(weatherCheckboxTts);
       weatherCheckBoxes.add(weatherCheckboxTts);
 
-      WebWetherSgd webWetSgd = new WebWetherSgd();
+      //WebWetherSgd webWetSgd = new WebWetherSgd();
       webWetSgd.parse();
       Checkbox weatherCheckboxSgd = new Checkbox("SUGARDAS (" + webWetSgd.getSgdToWeb() + ")");
       todosList.add(weatherCheckboxSgd);

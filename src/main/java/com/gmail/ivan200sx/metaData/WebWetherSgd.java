@@ -1,6 +1,8 @@
 package com.gmail.ivan200sx.metaData;
 
+import org.springframework.stereotype.Service;
 
+@Service
 public class WebWetherSgd extends WebParser {
 
   String tempSgd;
