@@ -13,6 +13,8 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
+import java.util.Date;
+import org.springframework.scheduling.annotation.Scheduled;
 
 /**
  * @author Jevgenij Mechtijev
@@ -29,6 +31,12 @@ public class WelcomeView extends VerticalLayout {
 
   @Autowired
   public WelcomeView(WebWetherTts webWetTts) {
+
+
+    @Scheduled(fixedDelay = 3000)
+    System.out.println("Method executed at every 5 seconds. Current time is :: " + new Date());
+
+
     VerticalLayout todosList = new VerticalLayout();
 
     TextField taskField = new TextField();
@@ -114,6 +122,9 @@ public class WelcomeView extends VerticalLayout {
     todosList.setAlignItems(Alignment.CENTER);
 
     add(todosList);
+
+
+
 
   }
 }
