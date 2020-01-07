@@ -8,7 +8,6 @@ import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
@@ -38,14 +37,13 @@ public class WelcomeView extends VerticalLayout {
     addButton.addClickListener(click -> {
       if (!taskField.isEmpty()) {
         Checkbox checkbox = new Checkbox(taskField.getValue());
-        //checkBoxes.add(checkbox);
+        checkBoxes.add(checkbox);
         todosList.add(checkbox);
         taskField.clear();
       }
     });
 
-    Button tempButton = new Button("Check weather"); // (3)
-    tempButton.addClickShortcut(Key.ENTER);
+    Button tempButton = new Button("Check weather");
     tempButton.addClickListener(click -> {
 
       WebWetherTts webWetTts = new WebWetherTts();
@@ -63,7 +61,6 @@ public class WelcomeView extends VerticalLayout {
     });
 
     Button deleteTempButton = new Button("Delete checked weather");
-    deleteTempButton.addClickShortcut(Key.ENTER);
     deleteTempButton.addClickListener(click -> {
       
       checkBoxes.forEach(checkbox -> {
@@ -113,8 +110,6 @@ public class WelcomeView extends VerticalLayout {
     todosList.setWidth("100%");
 
     todosList.setAlignItems(Alignment.CENTER);
-    /*Label labelTitulo = new Label("Teste");
-    todosList.add(labelTitulo);*/
 
     add(todosList);
 
