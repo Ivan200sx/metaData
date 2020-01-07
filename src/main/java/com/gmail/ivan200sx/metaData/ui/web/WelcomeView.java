@@ -9,12 +9,11 @@ import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
-import java.util.Date;
-import org.springframework.scheduling.annotation.Scheduled;
 
 /**
  * @author Jevgenij Mechtijev
@@ -30,13 +29,7 @@ public class WelcomeView extends VerticalLayout {
   private List<Checkbox> weatherCheckBoxes = new ArrayList<>();
 
   @Autowired
-  public WelcomeView(WebWetherTts webWetTts) {
-
-
-    @Scheduled(fixedDelay = 3000)
-    System.out.println("Method executed at every 5 seconds. Current time is :: " + new Date());
-
-
+  public WelcomeView(WebWetherTts webWetTts, WebWetherSgd webWetSgd) {
     VerticalLayout todosList = new VerticalLayout();
 
     TextField taskField = new TextField();
@@ -47,13 +40,14 @@ public class WelcomeView extends VerticalLayout {
     addButton.addClickListener(click -> {
       if (!taskField.isEmpty()) {
         Checkbox checkbox = new Checkbox(taskField.getValue());
-        checkBoxes.add(checkbox);
+        //checkBoxes.add(checkbox);
         todosList.add(checkbox);
         taskField.clear();
       }
     });
 
-    Button tempButton = new Button("Check weather");
+    Button tempButton = new Button("Check weather"); // (3)
+    tempButton.addClickShortcut(Key.ENTER);
     tempButton.addClickListener(click -> {
 
       //WebWetherTts webWetTts = new WebWetherTts();
@@ -62,7 +56,7 @@ public class WelcomeView extends VerticalLayout {
       todosList.add(weatherCheckboxTts);
       weatherCheckBoxes.add(weatherCheckboxTts);
 
-      WebWetherSgd webWetSgd = new WebWetherSgd();
+      //WebWetherSgd webWetSgd = new WebWetherSgd();
       webWetSgd.parse();
       Checkbox weatherCheckboxSgd = new Checkbox("SUGARDAS (" + webWetSgd.getSgdToWeb() + ")");
       todosList.add(weatherCheckboxSgd);
@@ -71,6 +65,7 @@ public class WelcomeView extends VerticalLayout {
     });
 
     Button deleteTempButton = new Button("Delete checked weather");
+    deleteTempButton.addClickShortcut(Key.ENTER);
     deleteTempButton.addClickListener(click -> {
       
       checkBoxes.forEach(checkbox -> {
@@ -120,11 +115,10 @@ public class WelcomeView extends VerticalLayout {
     todosList.setWidth("100%");
 
     todosList.setAlignItems(Alignment.CENTER);
+    /*Label labelTitulo = new Label("Teste");
+    todosList.add(labelTitulo);*/
 
     add(todosList);
-
-
-
 
   }
 }
