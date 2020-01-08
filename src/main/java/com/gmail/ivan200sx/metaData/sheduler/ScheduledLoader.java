@@ -15,6 +15,7 @@ public class ScheduledLoader {
     
     private WebWetherTts webWetherTts;
 
+    private  Double lastTemp = 0d ;
 
     @Autowired
     public ScheduledLoader(WebWetherTts webWetherTts){
@@ -23,9 +24,12 @@ public class ScheduledLoader {
 
 
     @Scheduled(fixedRate = 1000)
-    public String runLoader() {
-      System.out.println("Loader started with delay");
-      return ("testeg");
+    public void runLoader() {
+      lastTemp = Double.valueOf(webWetherTts.getTtsToWeb());
+      System.out.println("Loader started with delay");      
     }
 
+    public Double getLastTemp() {
+      return lastTemp;
+    }
 }

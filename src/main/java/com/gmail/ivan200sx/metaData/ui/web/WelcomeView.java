@@ -1,5 +1,6 @@
 package com.gmail.ivan200sx.metaData.ui.web;
 
+import java.awt.Label;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.page.Push;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -23,6 +25,7 @@ import org.springframework.scheduling.annotation.Scheduled;
  *
  */
 @Route(value = "", layout = MainLayout.class)
+@Push
 public class WelcomeView extends VerticalLayout {
 
   private static final long serialVersionUID = 1L;
@@ -31,7 +34,8 @@ public class WelcomeView extends VerticalLayout {
   private List<Checkbox> weatherCheckBoxes = new ArrayList<>();
 
   @Autowired
-  public WelcomeView(WebWetherTts webWetTts, WebWetherSgd webWetSgd) {
+  public WelcomeView(WebWetherTts webWetTts, WebWetherSgd webWetSgd,
+      ScheduledLoader scheduledLoader) {
     VerticalLayout todosList = new VerticalLayout();
 
     TextField taskField = new TextField();
@@ -80,14 +84,9 @@ public class WelcomeView extends VerticalLayout {
 
     });
 
-    ScheduledLoader scheduledLoader = new ScheduledLoader(webWetTts);
-
     add(new H1("Vaadin Checkbox Interface"));
     todosList.add(new HorizontalLayout(taskField, addButton, tempButton, deleteTempButton));
     todosList.setWidth("100%");
-
-    String runLoaderToWeb = scheduledLoader.runLoader();
-    todosList.add(runLoaderToWeb);
 
     todosList.setAlignItems(Alignment.CENTER);
 
