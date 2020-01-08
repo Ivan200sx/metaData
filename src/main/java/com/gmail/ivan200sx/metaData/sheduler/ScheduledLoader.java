@@ -1,7 +1,5 @@
 package com.gmail.ivan200sx.metaData.sheduler;
 
-import java.util.Timer;
-import java.util.TimerTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +13,7 @@ public class ScheduledLoader {
     private static final Logger logger = LoggerFactory.getLogger(ScheduledLoader.class);
 
     
-    private WebWetherTts webWetherTts; 
+    private WebWetherTts webWetherTts;
 
 
     @Autowired
@@ -25,10 +23,9 @@ public class ScheduledLoader {
 
 
     @Scheduled(fixedRate = 1000)
-    public void runLoader() {
+    public String runLoader() {
       System.out.println("Loader started with delay");
-      /// Disabled for dev speeedup
-      //timer.schedule(task, 10000, periodMinutes * 60 * 1000);
+      return ("testeg");
     }
 
 }

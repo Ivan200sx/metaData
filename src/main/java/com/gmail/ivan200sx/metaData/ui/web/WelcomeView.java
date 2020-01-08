@@ -2,6 +2,8 @@ package com.gmail.ivan200sx.metaData.ui.web;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.gmail.ivan200sx.metaData.sheduler.ScheduledLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.gmail.ivan200sx.metaData.WebWetherSgd;
 import com.gmail.ivan200sx.metaData.WebWetherTts;
@@ -9,11 +11,11 @@ import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
+import org.springframework.scheduling.annotation.Scheduled;
 
 /**
  * @author Jevgenij Mechtijev
@@ -40,7 +42,6 @@ public class WelcomeView extends VerticalLayout {
     addButton.addClickListener(click -> {
       if (!taskField.isEmpty()) {
         Checkbox checkbox = new Checkbox(taskField.getValue());
-        //checkBoxes.add(checkbox);
         todosList.add(checkbox);
         taskField.clear();
       }
@@ -50,13 +51,11 @@ public class WelcomeView extends VerticalLayout {
     tempButton.addClickShortcut(Key.ENTER);
     tempButton.addClickListener(click -> {
 
-      //WebWetherTts webWetTts = new WebWetherTts();
       webWetTts.parse();
       Checkbox weatherCheckboxTts = new Checkbox("TTS (" + webWetTts.getTtsToWeb() + ")");
       todosList.add(weatherCheckboxTts);
       weatherCheckBoxes.add(weatherCheckboxTts);
 
-      //WebWetherSgd webWetSgd = new WebWetherSgd();
       webWetSgd.parse();
       Checkbox weatherCheckboxSgd = new Checkbox("SUGARDAS (" + webWetSgd.getSgdToWeb() + ")");
       todosList.add(weatherCheckboxSgd);
@@ -67,7 +66,7 @@ public class WelcomeView extends VerticalLayout {
     Button deleteTempButton = new Button("Delete checked weather");
     deleteTempButton.addClickShortcut(Key.ENTER);
     deleteTempButton.addClickListener(click -> {
-      
+
       checkBoxes.forEach(checkbox -> {
         if(checkbox.getValue()) {
           todosList.remove(checkbox);
@@ -78,45 +77,19 @@ public class WelcomeView extends VerticalLayout {
           todosList.remove(checkbox);
         }
       });
-      
-      // Not recommended
-      /*for(int i=0; i<checkBoxes.size(); i++) {
-        if(!checkBoxes.get(i).getValue()) {
-          
-        }
-      }
-      
-      Iterator<Checkbox> it = checkBoxes.iterator();
-      while(it.hasNext()) {
-        Checkbox ch = it.next();
-        if(!ch.getValue()) {
-          
-        }
-      }
-
-      for(Checkbox ch: checkBoxes) {
-        if(!ch.getValue()) {
-
-        }
-
-      Stream<Component> com = getChildren();
-      
-      com.forEach(c -> {
-        if( c.getClass().equals(Checkbox.class)) {
-          
-        }
-      });*/
-
 
     });
+
+    ScheduledLoader scheduledLoader = new ScheduledLoader(webWetTts);
 
     add(new H1("Vaadin Checkbox Interface"));
     todosList.add(new HorizontalLayout(taskField, addButton, tempButton, deleteTempButton));
     todosList.setWidth("100%");
 
+    String runLoaderToWeb = scheduledLoader.runLoader();
+    todosList.add(runLoaderToWeb);
+
     todosList.setAlignItems(Alignment.CENTER);
-    /*Label labelTitulo = new Label("Teste");
-    todosList.add(labelTitulo);*/
 
     add(todosList);
 
