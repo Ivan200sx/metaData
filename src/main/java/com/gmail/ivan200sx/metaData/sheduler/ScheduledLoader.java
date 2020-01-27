@@ -23,10 +23,10 @@ public class ScheduledLoader {
     }
 
 
-    @Scheduled(fixedRate = 1000)
+    //@Scheduled(fixedRate = 1000)
     public void runLoader() {
-      lastTemp = Double.valueOf(webWetherTts.getTtsToWeb());
-      System.out.println("Loader started with delay");      
+      //lastTemp = Double.valueOf(webWetherTts.getTtsToWeb());
+      System.out.println("Loader started with delay");
     }
 
     public Double getLastTemp() {

@@ -25,7 +25,6 @@ import org.springframework.scheduling.annotation.Scheduled;
  *
  */
 @Route(value = "", layout = MainLayout.class)
-@Push
 public class WelcomeView extends VerticalLayout {
 
   private static final long serialVersionUID = 1L;
