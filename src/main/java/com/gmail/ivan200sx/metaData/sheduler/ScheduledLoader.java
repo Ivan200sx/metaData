@@ -12,10 +12,9 @@ public class ScheduledLoader {
 
     private static final Logger logger = LoggerFactory.getLogger(ScheduledLoader.class);
 
-    
     private WebWetherTts webWetherTts;
 
-    private  Double lastTemp = 0d ;
+    private  Double lastTempTts = 0d ;
 
     @Autowired
     public ScheduledLoader(WebWetherTts webWetherTts){
@@ -23,13 +22,14 @@ public class ScheduledLoader {
     }
 
 
-    //@Scheduled(fixedRate = 1000)
+    @Scheduled(fixedRate = 60000)
     public void runLoader() {
-      //lastTemp = Double.valueOf(webWetherTts.getTtsToWeb());
-      System.out.println("Loader started with delay");
+      webWetherTts.parse();
+      lastTempTts = Double.valueOf( webWetherTts.getTtsToWeb());
+      System.out.println("Loader started with delay 10 minutes");
     }
 
-    public Double getLastTemp() {
-      return lastTemp;
+    public Double getLastTtsTemp() {
+      return lastTempTts;
     }
 }

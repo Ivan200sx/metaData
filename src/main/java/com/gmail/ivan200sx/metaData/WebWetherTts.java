@@ -18,7 +18,7 @@ public class WebWetherTts extends WebParser {
     if (pos < 0)
       return false;
     String[] tags = html.substring(pos + 47, pos + 52).split("\"");
-    // System.out.println(tags[0]);
+     System.out.println("Tags: " + tags[0]);
     tepmTts = tags[0];
     return true;
   }

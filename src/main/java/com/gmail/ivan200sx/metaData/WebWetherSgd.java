@@ -18,7 +18,7 @@ public class WebWetherSgd extends WebParser {
     if (pos < 0)
       return false;
     String[] tags = html.substring(pos + 95, pos + 98).split("\"");
-    // System.out.println(tags[0]);
+    //System.out.println(tags[0]);
     tempSgd = tags[0];
     return true;
   }

@@ -29,67 +29,21 @@ public class WelcomeView extends VerticalLayout {
 
   private static final long serialVersionUID = 1L;
   public static final String VIEW_NAME = "record";
-  private List<Checkbox> checkBoxes = new ArrayList<>();
-  private List<Checkbox> weatherCheckBoxes = new ArrayList<>();
+  private ScheduledLoader scheduledLoader;
+  private TextField ttsTempField = new TextField("TTS");
+  private TextField sgdTempField = new TextField("Sugardas");
 
   @Autowired
   public WelcomeView(WebWetherTts webWetTts, WebWetherSgd webWetSgd,
       ScheduledLoader scheduledLoader) {
-    VerticalLayout todosList = new VerticalLayout();
+    this.scheduledLoader = scheduledLoader;
 
-    TextField taskField = new TextField();
-    taskField.setPlaceholder("Enter something to do...");
+    add(ttsTempField, sgdTempField);
+  }
 
-    Button addButton = new Button("Add");
-    addButton.addClickShortcut(Key.ENTER);
-    addButton.addClickListener(click -> {
-      if (!taskField.isEmpty()) {
-        Checkbox checkbox = new Checkbox(taskField.getValue());
-        todosList.add(checkbox);
-        taskField.clear();
-      }
-    });
-
-    Button tempButton = new Button("Check weather"); // (3)
-    tempButton.addClickShortcut(Key.ENTER);
-    tempButton.addClickListener(click -> {
-
-      webWetTts.parse();
-      Checkbox weatherCheckboxTts = new Checkbox("TTS (" + webWetTts.getTtsToWeb() + ")");
-      todosList.add(weatherCheckboxTts);
-      weatherCheckBoxes.add(weatherCheckboxTts);
-
-      webWetSgd.parse();
-      Checkbox weatherCheckboxSgd = new Checkbox("SUGARDAS (" + webWetSgd.getSgdToWeb() + ")");
-      todosList.add(weatherCheckboxSgd);
-      weatherCheckBoxes.add(weatherCheckboxSgd);
-
-    });
-
-    Button deleteTempButton = new Button("Delete checked weather");
-    deleteTempButton.addClickShortcut(Key.ENTER);
-    deleteTempButton.addClickListener(click -> {
-
-      checkBoxes.forEach(checkbox -> {
-        if(checkbox.getValue()) {
-          todosList.remove(checkbox);
-        }
-      });
-      weatherCheckBoxes.forEach(checkbox -> {
-        if(checkbox.getValue()) {
-          todosList.remove(checkbox);
-        }
-      });
-
-    });
-
-    add(new H1("Vaadin Checkbox Interface"));
-    todosList.add(new HorizontalLayout(taskField, addButton, tempButton, deleteTempButton));
-    todosList.setWidth("100%");
-
-    todosList.setAlignItems(Alignment.CENTER);
-
-    add(todosList);
-
+  @Scheduled(fixedRate = 1000)
+  public void runLoader() {
+    System.out.println("Request...");
+    ttsTempField.setValue(scheduledLoader.getLastTtsTemp() + "");
   }
 }
