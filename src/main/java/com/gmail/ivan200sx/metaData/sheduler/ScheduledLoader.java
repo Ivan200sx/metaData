@@ -22,7 +22,7 @@ public class ScheduledLoader {
     }
 
 
-    @Scheduled(fixedRate = 60000)
+    @Scheduled(fixedRate = 3000)
     public void runLoader() {
       webWetherTts.parse();
       lastTempTts = Double.valueOf( webWetherTts.getTtsToWeb());

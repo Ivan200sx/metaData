@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.gmail.ivan200sx.metaData.sheduler.ScheduledLoader;
+import com.vaadin.flow.router.PreserveOnRefresh;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.gmail.ivan200sx.metaData.WebWetherSgd;
 import com.gmail.ivan200sx.metaData.WebWetherTts;
@@ -25,8 +26,10 @@ import org.springframework.scheduling.annotation.Scheduled;
  *
  */
 @Route(value = "", layout = MainLayout.class)
+//@PreserveOnRefresh
 public class WelcomeView extends VerticalLayout {
 
+  Integer counter = 0;
   private static final long serialVersionUID = 1L;
   public static final String VIEW_NAME = "record";
   private ScheduledLoader scheduledLoader;
@@ -43,7 +46,8 @@ public class WelcomeView extends VerticalLayout {
 
   @Scheduled(fixedRate = 1000)
   public void runLoader() {
-    System.out.println("Request...");
-    ttsTempField.setValue(scheduledLoader.getLastTtsTemp() + "");
+    counter++;
+    System.out.println("Request..." + counter);
+    ttsTempField.setValue(scheduledLoader.getLastTtsTemp() + "-test");
   }
 }
